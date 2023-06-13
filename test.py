@@ -20,6 +20,7 @@ class Tamagochi:
     exhausted = 0
     alive = True
 
+
     def __init__(self):
         question = [
             inquirer.Text("name", message="Quel est le nom de votre tamagochi?")
@@ -27,13 +28,11 @@ class Tamagochi:
         answer = inquirer.prompt(question)
         self.name = answer.get("name")
 
+
+
     def activity_eat(self):
         self.food = self.food + random.randint(1, 6)
         return ("Mange...", 3.5)
-
-    # def activity_drink(self):
-    #     self.food = self.food + random.randint(1, 5)
-    #     return ("Boit...", 2.5)
 
     def activity_workout(self):
         self.food = self.food - random.randint(1, 6)
@@ -72,11 +71,7 @@ Energie: {self.exhausted}
 -----------
         """
         )
-         time.sleep()
-
-
-
-
+  
     def run(self):
         self.clear()
         self.status()
@@ -155,10 +150,14 @@ root = tk.Tk()
 root.title("TamagocHilel")
 
 # Preparation du canvas
-can1 = tk.Canvas(root, bg='dark grey', height=600, width=550)
+can1 = tk.Canvas(root, bg='Salmon1', height=600, width=600)
+# root = can1.resizable(height=False, width=False)
 can1.pack()
 
 # Créer des boutons pour les actions
+# bouton_question = tk.Button(root, text="Poser une question", command=poser_question)
+# bouton_question.pack()
+
 eat_button = tk.Button(root, text="Manger", command=eat_button_click)
 eat_button.pack()
 
@@ -178,3 +177,5 @@ quit_button = tk.Button(root, text="Quitter", command=quit_button_click)
 quit_button.pack()
 
 root.mainloop()
+
+
