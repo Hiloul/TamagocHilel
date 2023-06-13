@@ -79,6 +79,25 @@ Energie: {self.exhausted}
 -----------
         """
         )
+  
+    def run(self):
+        self.clear()
+        self.status()
+        question = [
+            inquirer.List(
+                "activity",
+                message="Que voulez-vous faire?",
+                choices=["Eat", "Drink", "Workout", "Play", "Sleep"],
+            ),
+        ]
+        answer = inquirer.prompt(question)
+        activity_name = "activity_{}".format(answer.get("activity")).lower()
+        activity = getattr(self, activity_name, lambda: "Invalid activity")
+        (status, sleep) = activity()
+        print(status)
+        time.sleep(sleep)
+
+
 
     def main():
         # Créer une animal de compagnie
@@ -185,6 +204,8 @@ sleep_button.pack()
 
 root.mainloop()
 
+
+# Soucis au niveau du main creation qu'a partir du terminal
 
 
 
