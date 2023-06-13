@@ -153,8 +153,8 @@ label = Label(root, text="Coucou Toi !", fg="magenta", font=("Verdana", 20, "ita
 label.pack()
 
 mon_menu = Menu(root)
-# Sous onglet
-fichier = Menu(mon_menu, tearoff=0)
+# Sous onglets (à mettre au dessus des onglet principaux)
+fichier = Menu(mon_menu, tearoff=0) #tearoff=0 evite le vide du menu
 fichier.add_command(label="Quitter", command=quit_button_click)
 options = Menu(mon_menu, tearoff=0)
 options.add_command(label="Passer", command=pass_button_click)
