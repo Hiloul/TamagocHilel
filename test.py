@@ -7,7 +7,6 @@ import tkinter as tk
 from tkinter import*
 from tkinter import messagebox
 
-
 class Tamagochi:
     def __init__(self, name, age, health, happiness):
         self.name = name
@@ -19,8 +18,7 @@ class Tamagochi:
     food = 100
     exhausted = 0
     alive = True
-
-
+    
     def __init__(self):
         question = [
             inquirer.Text("name", message="Quel est le nom de votre tamagochi?")
@@ -28,7 +26,16 @@ class Tamagochi:
         answer = inquirer.prompt(question)
         self.name = answer.get("name")
 
-
+    def create_pet(self):
+        question = [
+            inquirer.Text("name", message="Quel est le nom de votre tamagochi?")
+        ]    
+    # Afficher la boîte de dialogue avec la question
+        reponse = inquirer.prompt(question)
+        self.name = reponse.get("name")
+    # Récupérer la réponse et l'afficher dans une boîte de dialogue Tkinter
+        nom = reponse['name']
+        messagebox.showinfo('Réponse', f'Coucou {nom}')
 
     def activity_eat(self):
         self.food = self.food + random.randint(1, 6)
@@ -116,7 +123,9 @@ Energie: {self.exhausted}
 #     main()
 
 
-
+def create_button_click():
+    pet.create_pet()
+    pet.status()
 
 def eat_button_click():
     pet.activity_eat()
@@ -151,16 +160,26 @@ root.title("TamagocHilel")
 root.resizable(height=False, width=False)
 label = Label(root, text="Coucou Toi !", fg="magenta", font=("Verdana", 20, "italic bold"))
 label.pack()
+# Label name Test
+label_name = tk.Label(root, text="Nom:")
+label_name.pack()
+entry_name = tk.Entry(root)
+entry_name.pack()
+
 
 mon_menu = Menu(root)
 # Sous onglets (à mettre au dessus des onglet principaux)
 fichier = Menu(mon_menu, tearoff=0) #tearoff=0 evite le vide du menu
+fichier.add_command(label="Créer", command=create_button_click)
 fichier.add_command(label="Quitter", command=quit_button_click)
 options = Menu(mon_menu, tearoff=0)
 options.add_command(label="Passer", command=pass_button_click)
 # Les onglets
 mon_menu.add_cascade(label="Fichier", menu=fichier)
 mon_menu.add_cascade(label="Options", menu=options)
+
+# create_button = tk.Button(root, text="Créer", command=create_button_click)
+# create_button.pack()
 
 root.config(menu=mon_menu)
 
@@ -201,5 +220,9 @@ sleep_button = tk.Button(root, text="Dormir", command=sleep_button_click)
 sleep_button.pack()
 
 root.mainloop()
+
+
+
+
 
 
