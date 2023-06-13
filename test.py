@@ -1,10 +1,10 @@
 import random
 import inquirer
-import os
 import time
 import sched
 import threading
 import tkinter as tk
+from tkinter import*
 from tkinter import messagebox
 
 
@@ -22,7 +22,7 @@ class Tamagochi:
 
     def __init__(self):
         question = [
-            inquirer.Text("name", message="Quel est le nom de votre tamagotchi?")
+            inquirer.Text("name", message="Quel est le nom de votre tamagochi?")
         ]
         answer = inquirer.prompt(question)
         self.name = answer.get("name")
@@ -31,9 +31,9 @@ class Tamagochi:
         self.food = self.food + random.randint(1, 6)
         return ("Mange...", 3.5)
 
-    def activity_drink(self):
-        self.food = self.food + random.randint(1, 5)
-        return ("Boit...", 2.5)
+    # def activity_drink(self):
+    #     self.food = self.food + random.randint(1, 5)
+    #     return ("Boit...", 2.5)
 
     def activity_workout(self):
         self.food = self.food - random.randint(1, 6)
@@ -62,16 +62,20 @@ class Tamagochi:
             self.alive = False
 
     def status(self):
-        print(
+         messagebox.showinfo("Status",
             f"""
-Nom: {self.name}
-Age: {round(self.age)}
-Nourriture: {self.food}
-Ennui: {self.bored}
+Nom: {self.name}\n
+Age: {round(self.age)}\n
+Nourriture: {self.food}\n
+Ennui: {self.bored}\n
 Energie: {self.exhausted}
 -----------
         """
         )
+         time.sleep()
+
+
+
 
     def run(self):
         self.clear()
@@ -79,7 +83,7 @@ Energie: {self.exhausted}
         question = [
             inquirer.List(
                 "activity",
-                message="What should we do?",
+                message="Que voulez-vous faire?",
                 choices=["Eat", "Drink", "Workout", "Play", "Sleep"],
             ),
         ]
@@ -90,32 +94,27 @@ Energie: {self.exhausted}
         print(status)
         time.sleep(sleep)
 
-    def clear(self):
-        if os.name == "nt":
-            _ = os.system("cls")
-        else:
-            _ = os.system("clear")
 
 
-# def main():
-#     # Créer une animal de compagnie
-#     tamago = Tamagochi()
-#     # Sleep pour les actions
-#     s = sched.scheduler(time.time, time.sleep)
+    def main():
+        # Créer une animal de compagnie
+        tamago = Tamagochi()
+        # Sleep pour les actions
+        s = sched.scheduler(time.time, time.sleep)
 
-#     def run(sc):
-#         tamago.pass_time()
-#         if tamago.alive:
-#             s.enter(10, 1, run, (sc,))
+        def run(sc):
+            tamago.pass_time()
+            if tamago.alive:
+                s.enter(10, 1, run, (sc,))
 
-#     s.enter(10, 1, run, (s,))
-#     t = threading.Thread(target=s.run)
-#     t.start()
+        s.enter(10, 1, run, (s,))
+        t = threading.Thread(target=s.run)
+        t.start()
 
-    # while tamago.alive:
-    #     tamago.run()
+        while tamago.alive:
+            tamago.run()
 
-    # print(f"{tamago.name} has died :(")
+        print(f"{tamago.name} has died :(")
 
 
 # if __name__ == "__main__":
@@ -126,10 +125,6 @@ Energie: {self.exhausted}
 
 def eat_button_click():
     pet.activity_eat()
-    pet.status()
-
-def drink_button_click():
-    pet.activity_drink()
     pet.status()
 
 def work_button_click():
@@ -159,12 +154,13 @@ pet = Tamagochi()
 root = tk.Tk()
 root.title("TamagocHilel")
 
+# Preparation du canvas
+can1 = tk.Canvas(root, bg='dark grey', height=600, width=550)
+can1.pack()
+
 # Créer des boutons pour les actions
 eat_button = tk.Button(root, text="Manger", command=eat_button_click)
 eat_button.pack()
-
-drink_button = tk.Button(root, text="Boire", command=drink_button_click)
-drink_button.pack()
 
 work_button = tk.Button(root, text="Sport", command=work_button_click)
 work_button.pack()
@@ -180,10 +176,5 @@ pass_button.pack()
 
 quit_button = tk.Button(root, text="Quitter", command=quit_button_click)
 quit_button.pack()
-
-# while pet.alive:
-#         pet.run()
-
-# print(f"{pet.name} est mort TT'")
 
 root.mainloop()
