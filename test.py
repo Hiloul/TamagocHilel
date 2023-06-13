@@ -148,10 +148,40 @@ pet = Tamagochi()
 # Créer une fenêtre Tkinter
 root = tk.Tk()
 root.title("TamagocHilel")
+root.resizable(height=False, width=False)
+label = Label(root, text="Coucou Toi !", fg="magenta", font=("Verdana", 20, "italic bold"))
+label.pack()
+
+mon_menu = Menu(root)
+# Sous onglet
+fichier = Menu(mon_menu, tearoff=0)
+fichier.add_command(label="Quitter", command=quit_button_click)
+options = Menu(mon_menu, tearoff=0)
+options.add_command(label="Passer", command=pass_button_click)
+# Les onglets
+mon_menu.add_cascade(label="Fichier", menu=fichier)
+mon_menu.add_cascade(label="Options", menu=options)
+
+root.config(menu=mon_menu)
+
+
+
+# Label input inclus
+# def inputFunction():
+#     if mon_input.get() == "hiloul":
+#         print("cc")
+#     else:
+#         print("byebye")
+# mon_input = StringVar()
+# label8 = Label(root, text="test")
+# label8.pack()
+# entree=Entry(root, textvariable=mon_input)
+# entree.pack()
+# bouton = Button(root, text="Ok", textvariable=inputFunction)
+# bouton.pack()
 
 # Preparation du canvas
 can1 = tk.Canvas(root, bg='Salmon1', height=600, width=600)
-# root = can1.resizable(height=False, width=False)
 can1.pack()
 
 # Créer des boutons pour les actions
@@ -170,11 +200,11 @@ play_button.pack()
 sleep_button = tk.Button(root, text="Dormir", command=sleep_button_click)
 sleep_button.pack()
 
-pass_button = tk.Button(root, text="Passer", command=pass_button_click)
-pass_button.pack()
+# pass_button = tk.Button(root, text="Passer", command=pass_button_click)
+# pass_button.pack()
 
-quit_button = tk.Button(root, text="Quitter", command=quit_button_click)
-quit_button.pack()
+# quit_button = tk.Button(root, text="Quitter", command=quit_button_click)
+# quit_button.pack()
 
 root.mainloop()
 
