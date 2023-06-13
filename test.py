@@ -200,12 +200,6 @@ play_button.pack()
 sleep_button = tk.Button(root, text="Dormir", command=sleep_button_click)
 sleep_button.pack()
 
-# pass_button = tk.Button(root, text="Passer", command=pass_button_click)
-# pass_button.pack()
-
-# quit_button = tk.Button(root, text="Quitter", command=quit_button_click)
-# quit_button.pack()
-
 root.mainloop()
 
 
