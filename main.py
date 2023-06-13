@@ -4,8 +4,12 @@ import sched
 import threading
 import inquirer
 
-
 class Tamagotchi:
+    def __init__(self, name, age, health, happiness):
+        self.name = name
+        self.age = age
+        self.health = health
+        self.happiness = happiness
     age = 0
     bored = 0
     food = 100
@@ -14,7 +18,7 @@ class Tamagotchi:
 
     def __init__(self):
         question = [
-            inquirer.Text("name", message="What's the name of your tamagotchi?")
+            inquirer.Text("name", message="Quel est le nom de votre tamagotchi?")
         ]
         answer = inquirer.prompt(question)
         self.name = answer.get("name")
@@ -87,8 +91,7 @@ Exhausted: {self.exhausted}
             _ = os.system("cls")
         else:
             _ = os.system("clear")
-
-
+######################################
 def main():
     tamago = Tamagotchi()
 
