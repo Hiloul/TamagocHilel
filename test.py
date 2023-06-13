@@ -79,25 +79,6 @@ Energie: {self.exhausted}
 -----------
         """
         )
-  
-    def run(self):
-        self.clear()
-        self.status()
-        question = [
-            inquirer.List(
-                "activity",
-                message="Que voulez-vous faire?",
-                choices=["Eat", "Drink", "Workout", "Play", "Sleep"],
-            ),
-        ]
-        answer = inquirer.prompt(question)
-        activity_name = "activity_{}".format(answer.get("activity")).lower()
-        activity = getattr(self, activity_name, lambda: "Invalid activity")
-        (status, sleep) = activity()
-        print(status)
-        time.sleep(sleep)
-
-
 
     def main():
         # Créer une animal de compagnie
@@ -119,14 +100,11 @@ Energie: {self.exhausted}
 
         print(f"{tamago.name} has died :(")
 
-
-# if __name__ == "__main__":
-#     main()
-
-
+# Fonctions des boutons
 def create_button_click():
-    pet.create_pet()
-    pet.status()
+    if messagebox.askyesno("Recréer", "Vous êtes sur(e) de vouloir recommencer?"):
+        pet.create_pet()
+        pet.status()
 
 def eat_button_click():
     pet.activity_eat()
@@ -184,22 +162,6 @@ mon_menu.add_cascade(label="Options", menu=options)
 # create_button.pack()
 
 root.config(menu=mon_menu)
-
-
-
-# Label input inclus
-# def inputFunction():
-#     if mon_input.get() == "hiloul":
-#         print("cc")
-#     else:
-#         print("byebye")
-# mon_input = StringVar()
-# label8 = Label(root, text="test")
-# label8.pack()
-# entree=Entry(root, textvariable=mon_input)
-# entree.pack()
-# bouton = Button(root, text="Ok", textvariable=inputFunction)
-# bouton.pack()
 
 # Preparation du canvas
 can1 = tk.Canvas(root, bg='Salmon1', height=600, width=600)
