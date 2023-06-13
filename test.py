@@ -39,24 +39,25 @@ class Tamagochi:
 
     def activity_eat(self):
         self.food = self.food + random.randint(1, 6)
-        return ("Mange...", 3.5)
+        return ("Mange...", time.sleep(3.5))
+       
 
     def activity_workout(self):
         self.food = self.food - random.randint(1, 6)
         self.bored = self.bored - random.randint(1, 11)
         self.exhausted = self.exhausted + random.randint(10, 21)
-        return ("Fait du sport...", 6)
+        return ("Fait du sport...", time.sleep(6))
 
     def activity_play(self):
         self.food = self.food - random.randint(1, 5)
         self.bored = self.bored - random.randint(10, 21)
         self.exhausted = self.exhausted + random.randint(10, 21)
-        return ("Joue...", 4)
+        return ("Joue...", time.sleep(4))
 
     def activity_sleep(self):
         self.exhausted = 0
         self.food = 20
-        return ("Endormi(e)...", 10)
+        return ("Endormi(e)...", time.sleep(10))
 
     def pass_time(self):
         self.age = self.age + random.randint(1, 3)
@@ -144,8 +145,9 @@ def sleep_button_click():
     pet.status()
 
 def pass_button_click():
-    pet.pass_time()
-    pet.status()
+    if messagebox.askyesno("Passer", "Vous êtes sur(e) de vouloir passer?"):
+        pet.pass_time()
+        pet.status()
 
 def quit_button_click():
     if messagebox.askyesno("Quit", "Vous êtes sur(e) de vouloir quitter?"):
